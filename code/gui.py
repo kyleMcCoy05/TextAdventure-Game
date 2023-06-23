@@ -13,6 +13,8 @@ stat = []
 
 save = []
 
+subtract = lambda: maxStartStats-1
+
 # function to load player save location
 def loader() -> str:
     master = tk.Tk()
@@ -43,7 +45,11 @@ def maker(player: object):
 
     for index, item in enumerate(player.stats):
         tk.Label(root, text=item).grid(row=(index+3))
-        stats.append(tk.Entry(root))
+        stats.append(tk.Spinbox(root,
+                                increment=1, 
+                                state='normal', 
+                                from_=0, 
+                                to=10))
 
     confirmButton = tk.Button(root, text='Confirm', command=setPlayer)
     confirmButton.grid(row=10, column=1)
@@ -51,7 +57,7 @@ def maker(player: object):
     cancelButton.grid(row=10, column=2)
 
     for e, i in enumerate(stats):
-        i.grid(row=(e+3), column=1)
+        i.grid(row=(e+3), column=1, pady = 5)
 
     root.mainloop()
 
@@ -95,6 +101,8 @@ def setPlayer():
         for i in stats:
             # gets value of that isteration of stats
             _ = i.get()
+            if int(_) > 10:
+                popupmsg(" Invaled Input \n max stat is '10'")
             # if iteration is not empty
             if _ != '':
                 # adds it to the stat liberary
@@ -123,7 +131,7 @@ def cancel() -> None:
     root.destroy()
 
 # function to display a popup message
-def popupmsg(msg: str) -> None:
+def popupmsg(msg: str = 'invaled input') -> None:
     popup = tk.Tk()
     popup.wm_title("!")
     label = ttk.Label(popup, text=msg)
@@ -131,3 +139,8 @@ def popupmsg(msg: str) -> None:
     B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
     B1.pack()
     popup.mainloop()
+
+if __name__ == '__main__':
+    from player import *
+    p = Player()
+    maker(p)

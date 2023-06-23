@@ -1,0 +1,4 @@
+Sneak,0
+stab,10
+dodge,0
+heal,10

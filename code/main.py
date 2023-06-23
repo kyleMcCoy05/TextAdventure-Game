@@ -1,6 +1,7 @@
 from config import *
 from player import *
 from support import *
+from battle import *
 from gui import maker, loader
 
 player = Player()
@@ -9,11 +10,13 @@ def characterSelect() -> None:
     playerSave = loader()
     loadData(playerSave, player)
     player.setAttributes()
+    player.setAttacks()
     player.playerSheet()
 
 def characterMaker() -> None:
     maker(player)
     player.setAttributes()
+    player.setAttacks()
     player.playerSheet()
 
 def main() -> None:
@@ -29,6 +32,10 @@ def main() -> None:
 
     while playing:
         
+        b = Battle(player)
+        
+        b.start()
+
         break
 
 if __name__ == "__main__":

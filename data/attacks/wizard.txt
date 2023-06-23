@@ -1,0 +1,4 @@
+Fireball,15
+shock,10
+bullet,5
+heal,10

@@ -1,0 +1,4 @@
+Punch,15
+Kick,10
+Dodge,0
+Block,10

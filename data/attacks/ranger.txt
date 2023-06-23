@@ -1,0 +1,4 @@
+Shoot (Arrow),15
+Shoot (Gun),20
+Throwing Knife,10
+Dodge,0

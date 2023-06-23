@@ -1,10 +1,10 @@
+from typing import Any
 from config import *
-from file import getAttacks
 
-class Player:
+class Enemy:
 
-    def __init__(self) -> None:
-
+    def __init__(self, cls: str) -> None:
+        
         self.maxHealth = 0
         self.maxMana = 0
 
@@ -17,48 +17,21 @@ class Player:
             "CHA" : 0,
         }
 
-        self.id = {
-            "name" : '',
-            "class" : '',
-        }
+        self.cls = cls
 
         self.attributes = {
             "Health" : 0,
 			"Mana" : 0,
 			"Level" : 1,
-			"EXP" : 0,
-			"maxEXP" : 50,
         }
 
         self.attacks = {
-
+            
         }
-
-    def playerSheet(self) -> None:
-
-        os.system('cls')
-
-        for i in self.id:
-            print(f'{i} : {self.id[i]}')
-
-        print()
-
-        for i in self.attributes:
-            if i != 'maxEXP':
-                if i == 'EXP':
-                    print(f"{i} : {self.attributes[i]} / {self.attributes['maxEXP']}")
-                elif i == 'Health':
-                    print(f"{i} : {self.attributes[i]} / {self.maxHealth}")
-                else:
-                    print(f"{i} : {self.attributes[i]}")
-
-        print()
-
-        for i in self.stats:
-            print(f'{i} : {self.stats[i]}')
-        
-        input()
-
+    
+    def setStats(self) -> None:
+        pass
+    
     def setHealth(self) -> None:
         self.maxHealth = int((baseHealth + (maxHP - baseHealth) * self.attributes['Level'] / maxLevel) + (0.5**int(self.stats['CON'])))
         self.attributes['Health'] = self.maxHealth
@@ -73,7 +46,7 @@ class Player:
 
     def setAttacks(self):
         attacks = []
-        attacksRaw = getAttacks(self.id['class']).split('\n')
+        attacksRaw = getAttacks(self.cls).split('\n')
         for i in range(len(attacksRaw)):
             attack = attacksRaw[i].split(',')
             attacks.append((attack[0], attack[1]))

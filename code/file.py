@@ -33,3 +33,19 @@ def loadData(name: str, player) -> None:
             }
     except Exception as e:
         return LookupError
+    
+def getAttacks(cls) -> list:
+    
+    match cls:
+        case 'Wizard':
+            path = r'C:\Users/kyleo/Documents/Projects/Code/Text Game/data/attacks/wizard.txt'
+        case 'Fighter':
+            path = r'C:\Users/kyleo/Documents/Projects/Code/Text Game/data/attacks/fighter.txt'
+        case 'Rouge':
+            path = r'C:\Users/kyleo/Documents/Projects/Code/Text Game/data/attacks/rouge.txt'
+        case 'Ranger':
+            path = r'C:\Users/kyleo/Documents/Projects/Code/Text Game/data/attacks/ranger.txt'
+    
+    with open(path, 'r') as f:
+        attacks = f.read()
+        return attacks
