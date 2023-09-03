@@ -11,7 +11,7 @@ def saveData(data, name: str = 'player.dat') -> None:
     with open(name, 'wb') as f:
         pickle.dump(data, f)
 
-def loadData(name: str, player) -> None:
+def loadData(name: str, player) -> str:
     global p
     p = player
     try:
@@ -31,20 +31,22 @@ def loadData(name: str, player) -> None:
                 "name" : str(data[0]),
                 "class" : str(data[1]),
             }
+
     except Exception as e:
-        return LookupError
+        error = f'{e} \n\n {LookupError}'
+        return error
     
 def getAttacks(cls) -> list:
     
     match cls:
         case 'Wizard':
-            path = r'C:\Users/kyleo/Documents/Projects/Code/Text Game/data/attacks/wizard.txt'
+            path = r'C:\Users\kyleo\OneDrive\Desktop\Game making\TextAdventure-Game-main\data\attacks\wizard.txt'
         case 'Fighter':
-            path = r'C:\Users/kyleo/Documents/Projects/Code/Text Game/data/attacks/fighter.txt'
+            path = r'C:\Users\kyleo\OneDrive\Desktop\Game making\TextAdventure-Game-main\data\attacks\fighter.txt'
         case 'Rouge':
-            path = r'C:\Users/kyleo/Documents/Projects/Code/Text Game/data/attacks/rouge.txt'
+            path = r'C:\Users\kyleo\OneDrive\Desktop\Game making\TextAdventure-Game-main\data\attacks\rouge.txt'
         case 'Ranger':
-            path = r'C:\Users/kyleo/Documents/Projects/Code/Text Game/data/attacks/ranger.txt'
+            path = r'C:\Users\kyleo\OneDrive\Desktop\Game making\TextAdventure-Game-main\data\attacks\ranger.txt'
     
     with open(path, 'r') as f:
         attacks = f.read()

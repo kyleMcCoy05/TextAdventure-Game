@@ -1,5 +1,6 @@
 from config import *
 from file import getAttacks
+from gui import maker, loader
 
 class Player:
 
@@ -39,23 +40,23 @@ class Player:
         os.system('cls')
 
         for i in self.id:
-            print(f'{i} : {self.id[i]}')
+            print(f'{i}: {self.id[i]}')
 
         print()
 
         for i in self.attributes:
             if i != 'maxEXP':
                 if i == 'EXP':
-                    print(f"{i} : {self.attributes[i]} / {self.attributes['maxEXP']}")
+                    print(f"{i}: {self.attributes[i]} / {self.attributes['maxEXP']}")
                 elif i == 'Health':
-                    print(f"{i} : {self.attributes[i]} / {self.maxHealth}")
+                    print(f"{i}: {self.attributes[i]} / {self.maxHealth}")
                 else:
-                    print(f"{i} : {self.attributes[i]}")
+                    print(f"{i}: {self.attributes[i]}")
 
         print()
 
         for i in self.stats:
-            print(f'{i} : {self.stats[i]}')
+            print(f'{i}: {self.stats[i]}')
         
         input()
 
@@ -64,7 +65,7 @@ class Player:
         self.attributes['Health'] = self.maxHealth
 
     def setMana(self) -> None:
-        self.maxMana = int((baseHealth + (maxMana - baseHealth) * self.attributes['Level'] / maxLevel) + (0.5**int(self.stats['INT'] // 0.5**int(self.stats['WIS']))))
+        self.maxMana = int((baseHealth + (maxMana - baseHealth) * self.attributes['Level'] / maxLevel) + (0.5**int(self.stats['INT']) // 0.5**int(self.stats['WIS'])))
         self.attributes['Mana'] = self.maxMana
 
     def setAttributes(self) -> None:
@@ -72,6 +73,7 @@ class Player:
         self.setMana()
 
     def setAttacks(self):
+
         attacks = []
         attacksRaw = getAttacks(self.id['class']).split('\n')
         for i in range(len(attacksRaw)):
@@ -79,3 +81,23 @@ class Player:
             attacks.append((attack[0], attack[1]))
         for i in attacks:
             self.attacks.setdefault(i[0],i[1])
+
+    def make(self):
+        p = maker(self)
+        if p == None:
+            return None
+        self.setAttributes()
+        self.setAttacks()
+        self.playerSheet()
+        return True
+    
+    def select(self):
+        playerSave = loader()
+        if playerSave == None:
+            return None
+        loadData(playerSave, self)
+        self.setAttributes()
+        self.setAttacks()
+        self.playerSheet()
+        return True
+    

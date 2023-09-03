@@ -4,7 +4,7 @@ import tkinter as tk
 import tkinter.ttk as ttk
 from tkinter import filedialog
 
-DATADIR = r'C:\Users\kyleo\Documents\Projects\Code\Text Game\data'
+DATADIR = r'C:\Users\kyleo\OneDrive\Desktop\Game making\TextAdventure-Game-main\data\characters'
 
 # Player config
 maxStartStats = 25

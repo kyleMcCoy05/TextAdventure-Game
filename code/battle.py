@@ -9,8 +9,15 @@ class Battle:
 
     def start(self) -> None:
 
+        print('Start')
+
         e = Enemy(random.choice(classes))
         e.setAttributes()
         
+        print("Enemy created")
 
-        
+        fight = True
+
+        while fight:
+
+            pass

@@ -1,34 +1,31 @@
-from config import *
+#  Read the README
+
+# from config import *
 from player import *
 from support import *
 from battle import *
-from gui import maker, loader
 
 player = Player()
-
-def characterSelect() -> None:
-    playerSave = loader()
-    loadData(playerSave, player)
-    player.setAttributes()
-    player.setAttacks()
-    player.playerSheet()
-
-def characterMaker() -> None:
-    maker(player)
-    player.setAttributes()
-    player.setAttacks()
-    player.playerSheet()
 
 def main() -> None:
 
     playing = titleScreen()
+    loading = playing
 
-    if playing == True:
-        newCharacter = input("Do you want to make a new character?(y/n): ").lower()
-        if newCharacter == 'n':
-            characterSelect()
-        else:
-            characterMaker()
+    while loading == True:
+        if playing == True:
+            newCharacter = input("Do you want to make a new character?(y/n): ").lower()
+            if newCharacter == 'n':
+                load = player.select()
+                if load != None:
+                    loading = False
+                    break
+            else:
+                load = player.make()
+                if load != None:
+                    loading = False
+                    break
+                
 
     while playing:
         

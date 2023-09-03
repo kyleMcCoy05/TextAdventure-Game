@@ -139,8 +139,3 @@ def popupmsg(msg: str = 'invaled input') -> None:
     B1 = ttk.Button(popup, text="Okay", command = popup.destroy)
     B1.pack()
     popup.mainloop()
-
-if __name__ == '__main__':
-    from player import *
-    p = Player()
-    maker(p)
